@@ -1,0 +1,264 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Resume Editor – Exact PDF Layout</title>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+  <style>
+    body {
+      margin: 0;
+      padding: 20px;
+      background: #f2f2f2;
+      font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .toolbar {
+      text-align: center;
+      margin-bottom: 15px;
+    }
+
+    .toolbar button {
+      margin: 0 6px;
+      padding: 8px 16px;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      background: #111827;
+      color: #fff;
+    }
+
+    .page {
+      width: 210mm;
+      height: 297mm; /* FIXED height – no overflow */
+      margin: 0 auto;
+      background: #fff;
+      padding: 28px 30px;
+      display: grid;
+      grid-template-columns: 32% 68%;
+      column-gap: 24px;
+      box-sizing: border-box;
+      overflow: hidden;
+    }
+
+    h1 {
+      font-size: 26px;
+      margin: 0;
+      letter-spacing: 1px;
+    }
+
+    h2 {
+      font-size: 14px;
+      margin: 20px 0 6px 0;
+      letter-spacing: 2px;
+    }
+
+    h3 {
+      font-size: 13px;
+      margin: 14px 0 4px 0;
+    }
+
+    p, li {
+      font-size: 11.5px;
+      line-height: 1.5;
+      margin: 0 0 6px 0;
+    }
+
+    ul {
+      margin: 6px 0 10px 18px;
+      padding: 0;
+    }
+
+    .left {
+      padding-right: 10px;
+    }
+
+    .right {
+      position: relative;
+      padding-left: 18px;
+    }
+
+    .right::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 18px; /* start after heading */
+      bottom: 18px; /* end before page bottom */
+      width: 2px;
+      background: #000;
+    }
+
+    .timeline-dot {
+      position: absolute;
+      left: -6px;
+      width: 10px;
+      height: 10px;
+      background: #000;
+      border-radius: 50%;
+    }
+
+    .subtle {
+      font-size: 11px;
+      color: #444;
+    }
+
+    .role {
+      font-size: 14px;
+      margin-top: 4px;
+    }
+
+    .section-line {
+      border-bottom: 2px solid #000;
+      margin-bottom: 8px;
+    }
+
+    [contenteditable="false"] {
+      outline: none;
+    }
+
+    [contenteditable="true"] {
+      outline: 1px dashed #9ca3af;
+    }
+  </style>
+</head>
+<body>
+
+<div class="toolbar">
+  <button onclick="enableEdit()">Edit</button>
+  <button onclick="disableEdit()">Lock</button>
+  <button onclick="downloadPDF()">Download PDF</button>
+</div>
+
+<div class="page" id="resume" style="page-break-after:avoid; page-break-inside:avoid;">
+
+  <!-- LEFT COLUMN -->
+  <div class="left">
+    <h1 contenteditable="false">SHIKHAR SEN</h1>
+    <p class="role" contenteditable="false">SOFTWARE ENGINEER</p>
+
+    <h2>CONTACT</h2>
+    <p contenteditable="false">📞 +91-8744019351</p>
+    <p contenteditable="false">✉️ senshikhar1997@gmail.com</p>
+    <p contenteditable="false">📍 Ghaziabad, India</p>
+    <p contenteditable="false">🔗 linkedin.com/in/shikhar-sen-32002b17a</p>
+
+    <h2>EDUCATION</h2>
+    <p contenteditable="false"><strong>K.I.E.T Group of Institutions</strong><br/>Ghaziabad (2016 – 2020)<br/>B.Tech in Computer Science</p>
+
+    <p contenteditable="false"><strong>Higher Secondary (12th)</strong><br/>Ram Kishan Institute, Ghaziabad (2015) – 82%</p>
+
+    <p contenteditable="false"><strong>Secondary (10th)</strong><br/>Ram Kishan Institute, Ghaziabad (2013) – CGPA 9</p>
+
+    <h2>SKILLS</h2>
+    <ul contenteditable="false">
+      <li>Languages & Frameworks: C#, C++, ASP.NET MVC, ASP.NET Core, .NET 8, JavaScript, TypeScript, React.js</li>
+      <li>Architecture & Practices: Microservices, REST APIs, System Design, Agile</li>
+      <li>Databases: SQL Server, MySQL, Elasticsearch</li>
+      <li>Messaging: ActiveMQ</li>
+      <li>Cloud & DevOps: AWS, Docker</li>
+      <li>Tools: Git, Bitbucket, Jira, Confluence, Azure TFS</li>
+      <li>Integrations: ADP, CSOD, iCIMS, Workday, Kenexa, SmartRecruiters, Ultipro</li>
+    </ul>
+  </div>
+
+  <!-- RIGHT COLUMN -->
+  <div class="right">
+    <h2>PROFILE</h2>
+    <div class="section-line"></div>
+    <p contenteditable="false">
+      Versatile and performance-focused software developer with 5+ years of experience in designing,
+      developing, and maintaining modern web applications using .NET (Core & MVC), C#, and microservices.
+      Expertise in building scalable backend services and REST APIs, optimizing database performance,
+      and integrating complex third-party systems. Proven ability to collaborate in agile teams and
+      deliver high-quality, maintainable software.
+    </p>
+
+    <h2>WORK EXPERIENCE</h2>
+    <div class="section-line"></div>
+
+    <h3 contenteditable="false">SHL India Pvt. Ltd. <span class="subtle">| 2020 – Present</span></h3>
+    <p contenteditable="false"><strong>Projects:</strong></p>
+    <p contenteditable="false" style="position:relative;padding-left:14px;"><span class="timeline-dot" style="top:4px;"></span><strong>TCI (Talent Central Integration)</strong></p>
+    <ul contenteditable="false">
+      <li>Built a multi-tenant microservices-based integration platform connecting 30+ ATS systems</li>
+      <li>Designed and developed 15+ scalable web modules using ASP.NET MVC/Core and C#</li>
+      <li>Developed and deployed 40+ RESTful APIs using .NET Core and Entity Framework</li>
+      <li>Optimized SQL queries and introduced caching, reducing API response time by 60%</li>
+      <li>Tech Stack: ASP.NET Core, MySQL, Elasticsearch, ActiveMQ</li>
+      <li>End-to-end ownership: registration → test delivery → scoring → report sync</li>
+    </ul>
+
+    <p contenteditable="false" style="position:relative;padding-left:14px;"><span class="timeline-dot" style="top:4px;"></span><strong>SHL Online Portal</strong></p>
+    <ul contenteditable="false">
+      <li>Contributed to ASP.NET + React.js assessment platform used by thousands daily</li>
+      <li>Dockerized services and deployed on AWS ECS</li>
+      <li>Achieved 100% unit test coverage using NUnit, reducing defects by ~40%</li>
+      <li>Improved CI/CD pipeline and peer code reviews</li>
+    </ul>
+
+    <p contenteditable="false" style="position:relative;padding-left:14px;"><span class="timeline-dot" style="top:4px;"></span><strong>Talent Intelligence (AI-driven Internal Hiring Platform)</strong></p>
+    <ul contenteditable="false">
+      <li>Conducted Matomo Analytics POC for internal user tracking</li>
+      <li>Integrated analytics using Tag Manager and embedded scripts</li>
+    </ul>
+  </div>
+</div>
+
+<script>
+  // Ensure script runs after DOM is loaded
+  document.addEventListener('DOMContentLoaded', function () {
+    window.enableEdit = function () {
+      document.querySelectorAll('[contenteditable]').forEach(el => {
+        el.setAttribute('contenteditable', 'true');
+      });
+    };
+
+    window.disableEdit = function () {
+      document.querySelectorAll('[contenteditable]').forEach(el => {
+        el.setAttribute('contenteditable', 'false');
+      });
+    };
+
+    window.downloadPDF = function () {
+      const element = document.getElementById('resume');
+      if (!element) {
+        alert('Resume element not found');
+        return;
+      }
+
+      const options = {
+        margin: 0,
+        filename: 'Shikhar_Sen_Resume.pdf',
+        image: { type: 'jpeg', quality: 1.0 },
+        html2canvas: {
+          scale: 3,
+          useCORS: true,
+          logging: false
+        },
+        jsPDF: {
+          unit: 'mm',
+          format: 'a4',
+          orientation: 'portrait',
+          compress: false
+        },
+        pagebreak: { mode: ['avoid-all', 'css'] }
+      };
+
+      // Generate PDF and force single page
+      html2pdf()
+        .from(element)
+        .set(options)
+        .toPdf()
+        .get('pdf')
+        .then(function (pdf) {
+          while (pdf.internal.getNumberOfPages() > 1) {
+            pdf.deletePage(pdf.internal.getNumberOfPages());
+          }
+        })
+        .save();
+    };
+  });
+</script>
+
+</body>
+</html>
